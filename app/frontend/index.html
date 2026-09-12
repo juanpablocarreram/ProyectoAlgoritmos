@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Percentil de saque ATP</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Percentil de saque ATP</h1>
+
+<section id="controles">
+  <label>
+    Estadística:
+    <select id="select-stat"></select>
+  </label>
+
+  <label>
+    Algoritmo:
+    <select id="select-algoritmo">
+      <option value="naive">Pivote ingenuo</option>
+      <option value="mom">Mediana de medianas</option>
+    </select>
+  </label>
+
+  <div class="presets">
+    <button data-percentil="90">Top 10%</button>
+    <button data-percentil="75">Top 25%</button>
+    <button data-percentil="50">Mediana</button>
+  </div>
+
+  <label>
+    Percentil: <span id="valor-percentil">50</span>
+    <input type="range" id="slider-percentil" min="1" max="99" value="50">
+  </label>
+
+  <button id="boton-calcular">Calcular corte</button>
+</section>
+
+<section id="resultado-percentil"></section>
+
+<section id="ubicar">
+  <h2>¿En qué percentil quedo yo?</h2>
+  <label>
+    Mi valor:
+    <input type="number" id="input-valor-propio" step="0.1">
+  </label>
+  <button id="boton-ubicar">Ubicarme</button>
+  <div id="resultado-ubicar"></div>
+</section>
+
+<section id="visualizador">
+  <h2>Partición paso a paso</h2>
+  <div id="tarjetas"></div>
+  <div class="controles-animacion">
+    <button id="boton-anterior">« Paso anterior</button>
+    <button id="boton-siguiente">Paso siguiente »</button>
+    <span id="info-paso"></span>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

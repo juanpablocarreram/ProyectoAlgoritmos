@@ -1,0 +1,43 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+#tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 4rem;
+}
+
+.tarjeta {
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  min-width: 3rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.tarjeta.pivote {
+  border-color: #d97706;
+  background: #fef3c7;
+}
+
+.tarjeta.puntero-i {
+  border-color: #2563eb;
+}
+
+.tarjeta.puntero-j {
+  background: #dbeafe;
+}
+
+.presets button {
+  margin-right: 0.5rem;
+}
