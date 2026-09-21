@@ -1,8 +1,8 @@
-# Percentil de saque ATP
+# Percentil ATP
 
 Calcula, con quickselect real (no con conteo ni con `sorted()` completo), el
-valor de corte de un percentil sobre estadísticas de jugadores ATP, y anima
-paso a paso la partición de Lomuto usada internamente.
+valor de corte de un percentil sobre distintas estadísticas de jugadores ATP
+(saque, edad, ranking, altura, aces, % de primer saque).
 
 ## Instalación y ejecución
 
@@ -49,12 +49,27 @@ Sin esa variable, la app funciona igual, siempre desde el CSV local.
 - 9 de TennisPredict.com ("How Fast Pro Players Serve In Tennis").
 
 La columna `edad_2025` (2025 menos el año de nacimiento) es una segunda
-estadística de ejemplo para probar la extensibilidad.
+estadística en el mismo archivo.
+
+### Dataset extendido (`data/atp_extra_stats.csv`)
+
+Top 50 del ranking ATP (temporada 2026) con puntos de ranking, altura,
+aces promedio por partido y % de primer saque adentro, calculados a partir
+de los CSV públicos de **Jeff Sackmann** (`tennis_atp`, licencia
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/);
+espejo usado: `github.com/Aneeshers/tennis-sackmann-archive`, ya que el
+repositorio original devolvía 404 al momento de generar este dataset).
+
+Se genera con `python3 data/build_extra_stats.py`, que cruza
+`atp_rankings_current.csv`, `atp_players.csv` y `atp_matches_2026.csv`
+(descargados aparte, ver el script). Solo se incluyen jugadores del top 50
+con altura registrada y al menos 3 partidos con estadísticas de saque en la
+temporada. Uso no comercial, académico.
 
 ## Agregar una estadística nueva
 
-En `app/backend/data_sources.py`, agregar una entrada a `STATS` apuntando a
-una columna del CSV (o de un CSV nuevo). No hay que tocar
+En `app/backend/data_sources.py`, agregar una entrada a `STATS` con
+`archivo` (el CSV dentro de `data/`) y `columna`. No hay que tocar
 `partition_trace.py` ni el motor de `src/`.
 
 ## Pruebas

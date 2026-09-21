@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Percentil de saque ATP</title>
+<title>Percentil ATP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,17 +16,18 @@
     <path d="M24 5 C 35 13, 35 35, 24 43" fill="none" stroke="#f0fdf4" stroke-width="2"/>
   </svg>
   <div>
-    <h1>Percentil de saque ATP</h1>
-    <p class="subtitulo">Qué tan rápido (o lento) saca un jugador, comparado con el resto del circuito ATP.</p>
+    <h1>Percentil ATP</h1>
+    <p class="subtitulo">Compara a un jugador con el resto del circuito ATP: saque, ranking, altura y más.</p>
   </div>
 </header>
 
 <p class="explicacion">
   Esta aplicación calcula, con el algoritmo <strong>quickselect</strong> (sin ordenar toda la lista),
-  el valor que separa a los jugadores en dos grupos según el percentil que elijas. Por ejemplo: si
-  seleccionas <strong>percentil 55</strong>, obtienes el valor que deja por debajo o igual al
-  <strong>55% de los jugadores con el dato más bajo</strong> —por ejemplo, los que sacan más lento—
-  dejando el <strong>45% restante</strong> por encima: los que sacan más rápido.
+  el valor que separa a los jugadores en dos grupos según la estadística y el percentil que elijas.
+  Por ejemplo: si seleccionas <strong>percentil 55</strong>, obtienes el valor que deja por debajo o
+  igual al <strong>55% de los jugadores con el dato más bajo</strong> de esa estadística —por
+  ejemplo, los que sacan más lento, o los de menor estatura— dejando el <strong>45% restante</strong>
+  por encima: el dato más alto.
 </p>
 
 <section id="controles">

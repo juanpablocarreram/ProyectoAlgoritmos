@@ -15,7 +15,7 @@ def test_stats_endpoint():
     respuesta = client.get("/api/stats")
     assert respuesta.status_code == 200
     cuerpo = respuesta.json()
-    assert set(cuerpo.keys()) == {"velocidad_saque", "edad"}
+    assert set(cuerpo.keys()) == set(data_sources.STATS.keys())
     assert len(cuerpo["velocidad_saque"]["jugadores"]) == 14
 
 

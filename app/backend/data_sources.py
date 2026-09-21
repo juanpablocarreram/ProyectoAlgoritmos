@@ -8,12 +8,12 @@ except ImportError:
     requests = None
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
-CSV_PATH = DATA_DIR / "atp_serve_speeds.csv"
 
 STATS = {
     "velocidad_saque": {
         "label": "Velocidad de primer saque",
         "unidad": "km/h",
+        "archivo": "atp_serve_speeds.csv",
         "columna": "velocidad_kmh",
         "etiqueta_bajo": "el saque más lento",
         "etiqueta_alto": "el saque más rápido",
@@ -21,15 +21,48 @@ STATS = {
     "edad": {
         "label": "Edad (cumplida en 2025)",
         "unidad": "años",
+        "archivo": "atp_serve_speeds.csv",
         "columna": "edad_2025",
         "etiqueta_bajo": "la edad más baja",
         "etiqueta_alto": "la edad más alta",
     },
+    "ranking_puntos": {
+        "label": "Puntos de ranking ATP",
+        "unidad": "pts",
+        "archivo": "atp_extra_stats.csv",
+        "columna": "ranking_puntos",
+        "etiqueta_bajo": "menos puntos de ranking",
+        "etiqueta_alto": "más puntos de ranking",
+    },
+    "altura": {
+        "label": "Altura",
+        "unidad": "cm",
+        "archivo": "atp_extra_stats.csv",
+        "columna": "altura_cm",
+        "etiqueta_bajo": "la estatura más baja",
+        "etiqueta_alto": "la estatura más alta",
+    },
+    "aces_promedio": {
+        "label": "Aces promedio por partido (2026)",
+        "unidad": "aces/partido",
+        "archivo": "atp_extra_stats.csv",
+        "columna": "aces_promedio",
+        "etiqueta_bajo": "menos aces en promedio",
+        "etiqueta_alto": "más aces en promedio",
+    },
+    "primer_saque_pct": {
+        "label": "Primer saque adentro (2026)",
+        "unidad": "%",
+        "archivo": "atp_extra_stats.csv",
+        "columna": "primer_saque_pct",
+        "etiqueta_bajo": "el porcentaje de primer saque más bajo",
+        "etiqueta_alto": "el porcentaje de primer saque más alto",
+    },
 }
 
 
-def _cargar_csv():
-    with open(CSV_PATH, newline="", encoding="utf-8") as archivo:
+def _cargar_csv(nombre_archivo):
+    with open(DATA_DIR / nombre_archivo, newline="", encoding="utf-8") as archivo:
         return list(csv.DictReader(archivo))
 
 
@@ -53,8 +86,9 @@ def _intentar_api():
 
 
 def obtener_estadistica(nombre_stat):
-    filas = _cargar_csv()
-    columna = STATS[nombre_stat]["columna"]
+    meta = STATS[nombre_stat]
+    filas = _cargar_csv(meta["archivo"])
+    columna = meta["columna"]
     return [{"jugador": fila["jugador"], "valor": float(fila[columna])} for fila in filas]
 
 
