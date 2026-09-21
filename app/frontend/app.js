@@ -67,14 +67,22 @@ document.getElementById("boton-anterior").addEventListener("click", () => {
   }
 });
 
+function marcarPresetActivo() {
+  document.querySelectorAll(".presets button").forEach((boton) => {
+    boton.classList.toggle("activo", boton.dataset.percentil === sliderPercentil.value);
+  });
+}
+
 sliderPercentil.addEventListener("input", () => {
   valorPercentil.textContent = sliderPercentil.value;
+  marcarPresetActivo();
 });
 
 document.querySelectorAll(".presets button").forEach((boton) => {
   boton.addEventListener("click", () => {
     sliderPercentil.value = boton.dataset.percentil;
     valorPercentil.textContent = boton.dataset.percentil;
+    marcarPresetActivo();
   });
 });
 
