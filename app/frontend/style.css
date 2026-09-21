@@ -1,5 +1,4 @@
 :root {
-  --bg: #f4faf6;
   --panel: #ffffff;
   --texto: #1c2b22;
   --texto-suave: #5b6b61;
@@ -17,10 +16,17 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("stadium.jpg") center / cover no-repeat fixed;
+}
+
 body {
   font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
   color: var(--texto);
-  background: var(--bg);
+  background: transparent;
   max-width: 960px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
@@ -32,6 +38,16 @@ body {
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.cabecera h1,
+.cabecera .subtitulo {
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.cabecera .subtitulo {
+  color: #e5e7eb;
 }
 
 .icono-tenis {
