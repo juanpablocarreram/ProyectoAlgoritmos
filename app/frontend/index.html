@@ -3,11 +3,31 @@
 <head>
 <meta charset="utf-8">
 <title>Percentil de saque ATP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Percentil de saque ATP</h1>
-<p class="subtitulo">Quickselect real sobre estadísticas ATP, con la partición de Lomuto animada paso a paso.</p>
+<header class="cabecera">
+  <svg class="icono-tenis" viewBox="0 0 48 48" aria-hidden="true">
+    <circle cx="24" cy="24" r="19" fill="#86efac" stroke="#15803d" stroke-width="2.5"/>
+    <path d="M24 5 C 13 13, 13 35, 24 43" fill="none" stroke="#f0fdf4" stroke-width="2"/>
+    <path d="M24 5 C 35 13, 35 35, 24 43" fill="none" stroke="#f0fdf4" stroke-width="2"/>
+  </svg>
+  <div>
+    <h1>Percentil de saque ATP</h1>
+    <p class="subtitulo">Qué tan rápido (o lento) saca un jugador, comparado con el resto del circuito ATP.</p>
+  </div>
+</header>
+
+<p class="explicacion">
+  Esta aplicación calcula, con el algoritmo <strong>quickselect</strong> (sin ordenar toda la lista),
+  el valor que separa a los jugadores en dos grupos según el percentil que elijas. Por ejemplo: si
+  seleccionas <strong>percentil 55</strong>, obtienes el valor que deja por debajo o igual al
+  <strong>55% de los jugadores con el dato más bajo</strong> —por ejemplo, los que sacan más lento—
+  dejando el <strong>45% restante</strong> por encima: los que sacan más rápido.
+</p>
 
 <section id="controles">
   <label>
@@ -33,6 +53,7 @@
     Percentil: <span id="valor-percentil">50</span>
     <input type="range" id="slider-percentil" min="1" max="99" value="50">
   </label>
+  <p class="pista">Mueve el slider y presiona "Calcular corte" para ver quién queda dentro.</p>
 
   <button id="boton-calcular">Calcular corte</button>
 </section>
@@ -50,18 +71,13 @@
 </section>
 
 <section id="visualizador">
-  <h2>Partición paso a paso</h2>
+  <h2>¿Quién está dentro del percentil?</h2>
   <div id="resumen-percentil"></div>
   <div id="leyenda" class="leyenda" hidden>
     <span class="leyenda-item dentro"><span class="punto"></span>Dentro del percentil</span>
     <span class="leyenda-item fuera"><span class="punto"></span>Fuera del percentil</span>
   </div>
   <div id="tarjetas"></div>
-  <div class="controles-animacion">
-    <button id="boton-anterior">« Paso anterior</button>
-    <button id="boton-siguiente">Paso siguiente »</button>
-    <span id="info-paso"></span>
-  </div>
 </section>
 
 <script src="app.js"></script>

@@ -5,13 +5,10 @@ const valorPercentil = document.getElementById("valor-percentil");
 const resultadoPercentil = document.getElementById("resultado-percentil");
 const resultadoUbicar = document.getElementById("resultado-ubicar");
 const tarjetasContenedor = document.getElementById("tarjetas");
-const infoPaso = document.getElementById("info-paso");
 const resumenPercentil = document.getElementById("resumen-percentil");
 const leyenda = document.getElementById("leyenda");
 
 let ultimosJugadores = [];
-let pasosPlanos = [];
-let pasoActual = 0;
 let corteActual = null;
 
 async function cargarStats() {
@@ -25,53 +22,21 @@ async function cargarStats() {
     selectStat.appendChild(opcion);
   }
   ultimosJugadores = datos[selectStat.value]?.jugadores || [];
+  dibujarTarjetas();
 }
 
-function aplanarRondas(rondas) {
-  const plano = [];
-  rondas.forEach((ronda, indiceRonda) => {
-    ronda.pasos.forEach((paso) => {
-      plano.push({ ...paso, ronda: indiceRonda, low: ronda.low, high: ronda.high, pivote: ronda.pivote });
-    });
-  });
-  return plano;
-}
-
-function dibujarPaso() {
+function dibujarTarjetas() {
   tarjetasContenedor.innerHTML = "";
-  if (pasosPlanos.length === 0) {
-    infoPaso.textContent = "";
-    return;
-  }
-  const paso = pasosPlanos[pasoActual];
-  ultimosJugadores.forEach((jugador, indice) => {
+  ultimosJugadores.forEach((jugador) => {
     const tarjeta = document.createElement("div");
     tarjeta.className = "tarjeta";
     tarjeta.textContent = `${jugador.jugador}: ${jugador.valor}`;
-    if (indice === paso.j) tarjeta.classList.add("puntero-j");
-    if (indice === paso.i) tarjeta.classList.add("puntero-i");
-    if (jugador.valor === paso.pivote) tarjeta.classList.add("pivote");
     if (corteActual !== null) {
       tarjeta.classList.add(jugador.valor <= corteActual ? "dentro-percentil" : "fuera-percentil");
     }
     tarjetasContenedor.appendChild(tarjeta);
   });
-  infoPaso.textContent = `Ronda ${paso.ronda + 1} — j=${paso.j}, i=${paso.i}, pivote=${paso.pivote}, swap=${paso.swap}`;
 }
-
-document.getElementById("boton-siguiente").addEventListener("click", () => {
-  if (pasoActual < pasosPlanos.length - 1) {
-    pasoActual += 1;
-    dibujarPaso();
-  }
-});
-
-document.getElementById("boton-anterior").addEventListener("click", () => {
-  if (pasoActual > 0) {
-    pasoActual -= 1;
-    dibujarPaso();
-  }
-});
 
 function marcarPresetActivo() {
   document.querySelectorAll(".presets button").forEach((boton) => {
@@ -96,6 +61,12 @@ selectStat.addEventListener("change", async () => {
   const respuesta = await fetch("/api/stats");
   const datos = await respuesta.json();
   ultimosJugadores = datos[selectStat.value].jugadores;
+  corteActual = null;
+  resultadoPercentil.textContent = "";
+  resultadoUbicar.textContent = "";
+  resumenPercentil.textContent = "";
+  leyenda.hidden = true;
+  dibujarTarjetas();
 });
 
 document.getElementById("boton-calcular").addEventListener("click", async () => {
@@ -115,9 +86,7 @@ document.getElementById("boton-calcular").addEventListener("click", async () => 
   const dentro = ultimosJugadores.filter((j) => j.valor <= corteActual).length;
   resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores están dentro del percentil ${cuerpo.percentil} (valor ≤ ${corteActual}).`;
   leyenda.hidden = false;
-  pasosPlanos = aplanarRondas(datos.rondas);
-  pasoActual = 0;
-  dibujarPaso();
+  dibujarTarjetas();
 });
 
 document.getElementById("boton-ubicar").addEventListener("click", async () => {
@@ -134,9 +103,7 @@ document.getElementById("boton-ubicar").addEventListener("click", async () => {
   const dentro = ultimosJugadores.filter((j) => j.valor <= corteActual).length;
   resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores tienen un valor menor o igual al tuyo (${corteActual}).`;
   leyenda.hidden = false;
-  pasosPlanos = aplanarRondas(datos.rondas);
-  pasoActual = 0;
-  dibujarPaso();
+  dibujarTarjetas();
 });
 
 cargarStats();

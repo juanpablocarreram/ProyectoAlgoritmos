@@ -1,20 +1,15 @@
 :root {
-  --bg: #f4f6fb;
+  --bg: #f4faf6;
   --panel: #ffffff;
-  --texto: #1f2430;
-  --texto-suave: #6b7280;
-  --acento: #4f46e5;
-  --acento-suave: #eef0ff;
-  --acento-hover: #4338ca;
-  --borde: #e5e7eb;
-  --pivote: #d97706;
-  --pivote-bg: #fef3c7;
-  --puntero-i: #2563eb;
-  --puntero-j-bg: #dbeafe;
+  --texto: #1c2b22;
+  --texto-suave: #5b6b61;
+  --acento: #16a34a;
+  --acento-suave: #dcfce7;
+  --acento-hover: #15803d;
+  --borde: #d9e8dd;
   --dentro: #16a34a;
-  --dentro-bg: #dcfce7;
   --fuera: #9ca3af;
-  --sombra: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --sombra: 0 1px 2px rgba(15, 42, 23, 0.05), 0 8px 20px rgba(15, 42, 23, 0.06);
   --radio: 14px;
 }
 
@@ -23,48 +18,55 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
   color: var(--texto);
-  background:
-    radial-gradient(1200px 400px at 10% -10%, #eef0ff 0%, transparent 60%),
-    radial-gradient(900px 300px at 100% 0%, #e0f2fe 0%, transparent 55%),
-    var(--bg);
+  background: var(--bg);
   max-width: 960px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.icono-tenis {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
 }
 
 h1 {
   font-size: 1.9rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0 0 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-h1::before {
-  content: "";
-  display: inline-block;
-  width: 0.6rem;
-  height: 1.6rem;
-  border-radius: 4px;
-  background: linear-gradient(180deg, var(--acento), #818cf8);
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
 .subtitulo {
-  margin: -1.3rem 0 2rem 1.2rem;
+  margin: 0.2rem 0 0;
   color: var(--texto-suave);
   font-size: 0.95rem;
+}
+
+.explicacion {
+  background: var(--acento-suave);
+  border: 1px solid #bbf0cf;
+  border-radius: var(--radio);
+  padding: 1rem 1.25rem;
+  font-size: 0.92rem;
+  color: #14532d;
+  margin-bottom: 2rem;
 }
 
 h2 {
   font-size: 1.15rem;
   font-weight: 600;
   margin: 0 0 1rem;
-  color: var(--texto);
 }
 
 section {
@@ -74,18 +76,6 @@ section {
   box-shadow: var(--sombra);
   padding: 1.5rem 1.75rem;
   margin-bottom: 1.5rem;
-  animation: aparecer 0.4s ease both;
-}
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 label {
@@ -106,13 +96,13 @@ input[type="number"] {
   padding: 0.55rem 0.7rem;
   border: 1px solid var(--borde);
   border-radius: 8px;
-  background: #fbfbfd;
+  background: #fbfdfc;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 select:hover,
 input[type="number"]:hover {
-  border-color: #c7cbe0;
+  border-color: #a9d3b6;
 }
 
 select:focus,
@@ -142,18 +132,18 @@ input[type="number"]:focus {
 
 .presets button {
   background: var(--acento-suave);
-  color: var(--acento);
+  color: var(--acento-hover);
   border: 1px solid transparent;
 }
 
 .presets button:hover {
-  background: #e0e3ff;
+  background: #bdf5d3;
 }
 
 .presets button.activo {
   background: var(--acento);
   color: #fff;
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.35);
 }
 
 label:has(#slider-percentil) {
@@ -168,8 +158,16 @@ input[type="range"] {
 }
 
 #valor-percentil {
-  color: var(--acento);
+  color: var(--acento-hover);
   font-weight: 700;
+}
+
+.pista {
+  flex: 1 1 100%;
+  margin: -0.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  font-weight: 400;
 }
 
 button {
@@ -188,16 +186,16 @@ button:active {
 
 #boton-calcular,
 #boton-ubicar {
-  background: linear-gradient(135deg, var(--acento), #6366f1);
+  background: linear-gradient(135deg, var(--acento), #22c55e);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
   margin-top: 0.75rem;
 }
 
 #boton-calcular:hover,
 #boton-ubicar:hover {
-  background: linear-gradient(135deg, var(--acento-hover), #4f46e5);
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, var(--acento-hover), var(--acento));
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.4);
 }
 
 #resultado-percentil {
@@ -205,7 +203,7 @@ button:active {
   font-weight: 600;
   color: var(--acento-hover);
   background: var(--acento-suave);
-  border: 1px solid #d9dcff;
+  border: 1px solid #bbf0cf;
   min-height: 1.2em;
 }
 
@@ -272,23 +270,8 @@ button:active {
   min-width: 3.5rem;
   text-align: center;
   font-weight: 500;
-  background: #fbfbfd;
+  background: #fbfdfc;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tarjeta.pivote {
-  border-color: var(--pivote);
-  background: var(--pivote-bg);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
-}
-
-.tarjeta.puntero-i {
-  border-color: var(--puntero-i);
-}
-
-.tarjeta.puntero-j {
-  background: var(--puntero-j-bg);
 }
 
 .tarjeta.dentro-percentil {
@@ -314,30 +297,6 @@ button:active {
 .tarjeta.fuera-percentil {
   border-left: 5px solid var(--fuera);
   opacity: 0.55;
-}
-
-.controles-animacion {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-}
-
-.controles-animacion button {
-  background: var(--panel);
-  border: 1px solid var(--borde);
-  color: var(--texto);
-}
-
-.controles-animacion button:hover {
-  border-color: var(--acento);
-  color: var(--acento);
-}
-
-#info-paso {
-  font-size: 0.85rem;
-  color: var(--texto-suave);
-  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 640px) {
