@@ -1,10 +1,10 @@
-"""Genera data/atp_extra_stats.csv a partir de los CSV publicos de Jeff
-Sackmann (tennis_atp, espejo en Aneeshers/tennis-sackmann-archive,
-licencia CC BY-NC-SA 4.0).
+"""Genera data/atp_extra_stats.csv, el unico dataset de la app, a partir
+de los CSV publicos de Jeff Sackmann (tennis_atp, espejo en
+Aneeshers/tennis-sackmann-archive, licencia CC BY-NC-SA 4.0).
 
 Toma el top 50 del ranking ATP mas reciente disponible, cruza con
-altura/nombre de atp_players.csv, y promedia aces y % de primer saque
-adentro de sus partidos de la temporada 2026 (atp_matches_2026.csv).
+altura/nombre/edad de atp_players.csv, y promedia aces y % de primer
+saque adentro de sus partidos de la temporada 2026 (atp_matches_2026.csv).
 
 Uso: python3 data/build_extra_stats.py
 Requiere los tres CSV de entrada ya descargados en /tmp (ver README).
@@ -20,6 +20,7 @@ SALIDA = Path(__file__).resolve().parent / "atp_extra_stats.csv"
 
 MIN_PARTIDOS = 3
 TOP_N_RANKING = 50
+ANIO_REFERENCIA = 2026
 
 
 def cargar_top_ranking():
@@ -40,10 +41,15 @@ def cargar_jugadores():
     jugadores = {}
     with PLAYERS_PATH.open() as archivo:
         for fila in csv.DictReader(archivo):
-            if not fila["height"]:
+            if not fila["height"] or not fila["dob"]:
                 continue
             nombre = f"{fila['name_first']} {fila['name_last']}".strip()
-            jugadores[fila["player_id"]] = {"nombre": nombre, "altura": int(fila["height"])}
+            edad = ANIO_REFERENCIA - int(fila["dob"][:4])
+            jugadores[fila["player_id"]] = {
+                "nombre": nombre,
+                "altura": int(fila["height"]),
+                "edad": edad,
+            }
     return jugadores
 
 
@@ -84,6 +90,7 @@ def main():
             "jugador": info["nombre"],
             "ranking_puntos": puntos,
             "altura_cm": info["altura"],
+            "edad": info["edad"],
             "aces_promedio": round(aces_prom, 1),
             "primer_saque_pct": round(saque_prom, 1),
         })
@@ -91,7 +98,7 @@ def main():
     with SALIDA.open("w", newline="", encoding="utf-8") as archivo:
         escritor = csv.DictWriter(
             archivo,
-            fieldnames=["jugador", "ranking_puntos", "altura_cm", "aces_promedio", "primer_saque_pct"],
+            fieldnames=["jugador", "ranking_puntos", "altura_cm", "edad", "aces_promedio", "primer_saque_pct"],
         )
         escritor.writeheader()
         escritor.writerows(filas_salida)

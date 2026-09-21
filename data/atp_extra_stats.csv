@@ -1,50 +1,50 @@
-jugador,ranking_puntos,altura_cm,aces_promedio,primer_saque_pct
-Jannik Sinner,13500,191,8.2,64.5
-Carlos Alcaraz,9960,183,4.9,68.2
-Alexander Zverev,7305,198,8.6,71.9
-Felix Auger Aliassime,4440,193,8.7,67.5
-Ben Shelton,3920,193,11.3,66.5
-Alex De Minaur,3905,183,3.8,57.7
-Novak Djokovic,3760,188,6.5,66.7
-Daniil Medvedev,3760,198,7.1,66.9
-Taylor Fritz,3720,196,15.4,68.5
-Flavio Cobolli,3540,183,5.8,54.7
-Alexander Bublik,2930,196,9.2,65.6
-Jiri Lehecka,2575,185,7.0,66.4
-Andrey Rublev,2460,188,6.0,61.6
-Casper Ruud,2425,183,5.4,65.9
-Karen Khachanov,2320,198,7.6,66.6
-Lorenzo Musetti,2315,185,4.1,66.2
-Jakub Mensik,2300,193,11.4,61.2
-Luciano Darderi,2300,183,5.9,56.6
-Learner Tien,2270,180,7.2,61.1
-Valentin Vacherot,2145,193,10.0,65.9
-Arthur Fils,1940,185,4.3,63.0
-Alejandro Davidovich Fokina,1860,183,3.9,70.3
-Arthur Rinderknech,1776,196,10.4,64.5
-Joao Fonseca,1735,185,5.2,66.4
-Frances Tiafoe,1705,188,6.1,61.4
-Francisco Cerundolo,1660,185,3.0,60.2
-Tommy Paul,1645,185,5.9,62.6
-Cameron Norrie,1595,188,5.3,63.1
-Tomas Martin Etcheverry,1510,196,6.0,64.0
-Alejandro Tabilo,1428,188,5.5,65.6
-Brandon Nakashima,1385,188,9.3,68.2
-Ugo Humbert,1370,188,7.0,60.2
-Matteo Arnaldi,1336,185,3.9,57.1
-Ignacio Buse,1316,185,4.6,61.1
-Corentin Moutet,1283,180,2.9,65.1
-Alexander Blockx,1280,191,6.1,61.2
-Alex Michelsen,1205,193,6.0,66.6
-Mariano Navone,1165,178,1.4,72.1
-Zizou Bergs,1150,185,7.0,56.7
-Tallon Griekspoor,1150,188,7.5,64.3
-Denis Shapovalov,1130,185,6.7,56.9
-Tomas Machac,1120,183,5.1,62.8
-Jaume Munar,1105,183,5.2,62.8
-Juan Manuel Cerundolo,1055,183,4.6,62.1
-Adrian Mannarino,1031,180,4.9,63.5
-Marin Cilic,994,198,10.4,56.7
-Matteo Berrettini,985,196,5.8,67.5
-Miomir Kecmanovic,980,183,5.8,62.0
-Nuno Borges,970,185,5.6,65.7
+jugador,ranking_puntos,altura_cm,edad,aces_promedio,primer_saque_pct
+Jannik Sinner,13500,191,25,8.2,64.5
+Carlos Alcaraz,9960,183,23,4.9,68.2
+Alexander Zverev,7305,198,29,8.6,71.9
+Felix Auger Aliassime,4440,193,26,8.7,67.5
+Ben Shelton,3920,193,24,11.3,66.5
+Alex De Minaur,3905,183,27,3.8,57.7
+Novak Djokovic,3760,188,39,6.5,66.7
+Daniil Medvedev,3760,198,30,7.1,66.9
+Taylor Fritz,3720,196,29,15.4,68.5
+Flavio Cobolli,3540,183,24,5.8,54.7
+Alexander Bublik,2930,196,29,9.2,65.6
+Jiri Lehecka,2575,185,25,7.0,66.4
+Andrey Rublev,2460,188,29,6.0,61.6
+Casper Ruud,2425,183,28,5.4,65.9
+Karen Khachanov,2320,198,30,7.6,66.6
+Lorenzo Musetti,2315,185,24,4.1,66.2
+Jakub Mensik,2300,193,21,11.4,61.2
+Luciano Darderi,2300,183,24,5.9,56.6
+Learner Tien,2270,180,21,7.2,61.1
+Valentin Vacherot,2145,193,28,10.0,65.9
+Arthur Fils,1940,185,22,4.3,63.0
+Alejandro Davidovich Fokina,1860,183,27,3.9,70.3
+Arthur Rinderknech,1776,196,31,10.4,64.5
+Joao Fonseca,1735,185,20,5.2,66.4
+Frances Tiafoe,1705,188,28,6.1,61.4
+Francisco Cerundolo,1660,185,28,3.0,60.2
+Tommy Paul,1645,185,29,5.9,62.6
+Cameron Norrie,1595,188,31,5.3,63.1
+Tomas Martin Etcheverry,1510,196,27,6.0,64.0
+Alejandro Tabilo,1428,188,29,5.5,65.6
+Brandon Nakashima,1385,188,25,9.3,68.2
+Ugo Humbert,1370,188,28,7.0,60.2
+Matteo Arnaldi,1336,185,25,3.9,57.1
+Ignacio Buse,1316,185,22,4.6,61.1
+Corentin Moutet,1283,180,27,2.9,65.1
+Alexander Blockx,1280,191,21,6.1,61.2
+Alex Michelsen,1205,193,22,6.0,66.6
+Mariano Navone,1165,178,25,1.4,72.1
+Zizou Bergs,1150,185,27,7.0,56.7
+Tallon Griekspoor,1150,188,30,7.5,64.3
+Denis Shapovalov,1130,185,27,6.7,56.9
+Tomas Machac,1120,183,26,5.1,62.8
+Jaume Munar,1105,183,29,5.2,62.8
+Juan Manuel Cerundolo,1055,183,25,4.6,62.1
+Adrian Mannarino,1031,180,38,4.9,63.5
+Marin Cilic,994,198,38,10.4,56.7
+Matteo Berrettini,985,196,30,5.8,67.5
+Miomir Kecmanovic,980,183,27,5.8,62.0
+Nuno Borges,970,185,29,5.6,65.7
