@@ -21,15 +21,6 @@
   </div>
 </header>
 
-<p class="explicacion">
-  Esta aplicación calcula, con el algoritmo <strong>quickselect</strong> (sin ordenar toda la lista),
-  el valor que separa a los jugadores en dos grupos según la estadística y el percentil que elijas.
-  Por ejemplo: si seleccionas <strong>percentil 55</strong>, obtienes el valor que deja por debajo o
-  igual al <strong>55% de los jugadores con el dato más bajo</strong> de esa estadística —por
-  ejemplo, los que sacan más lento, o los de menor estatura— dejando el <strong>45% restante</strong>
-  por encima: el dato más alto.
-</p>
-
 <section id="controles">
   <label>
     Estadística:
@@ -54,7 +45,7 @@
     Percentil: <span id="valor-percentil">50</span>
     <input type="range" id="slider-percentil" min="1" max="99" value="50">
   </label>
-  <p class="pista">Mueve el slider y presiona "Calcular corte" para ver quién queda dentro.</p>
+  <p class="pista" id="pista-percentil"></p>
 
   <button id="boton-calcular">Calcular corte</button>
 </section>

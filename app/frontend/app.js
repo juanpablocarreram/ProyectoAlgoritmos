@@ -7,10 +7,18 @@ const resultadoUbicar = document.getElementById("resultado-ubicar");
 const tarjetasContenedor = document.getElementById("tarjetas");
 const resumenPercentil = document.getElementById("resumen-percentil");
 const leyenda = document.getElementById("leyenda");
+const pistaPercentil = document.getElementById("pista-percentil");
 
 let ultimosJugadores = [];
 let corteActual = null;
 let etiquetaActual = { bajo: "el valor más bajo", alto: "el valor más alto" };
+let labelActual = "";
+
+function actualizarPista() {
+  const valor = sliderPercentil.value;
+  const etiqueta = labelActual ? labelActual.charAt(0).toLowerCase() + labelActual.slice(1) : "esta estadística";
+  pistaPercentil.textContent = `Selecciona ${valor} para ver a los jugadores que caen dentro del percentil ${valor}% de ${etiqueta}.`;
+}
 
 async function cargarStats() {
   const respuesta = await fetch("/api/stats");
@@ -25,6 +33,8 @@ async function cargarStats() {
   const statInfo = datos[selectStat.value];
   ultimosJugadores = statInfo?.jugadores || [];
   etiquetaActual = { bajo: statInfo?.etiqueta_bajo, alto: statInfo?.etiqueta_alto };
+  labelActual = statInfo?.label || "";
+  actualizarPista();
   dibujarTarjetas();
 }
 
@@ -50,6 +60,7 @@ function marcarPresetActivo() {
 sliderPercentil.addEventListener("input", () => {
   valorPercentil.textContent = sliderPercentil.value;
   marcarPresetActivo();
+  actualizarPista();
 });
 
 document.querySelectorAll(".presets button").forEach((boton) => {
@@ -57,6 +68,7 @@ document.querySelectorAll(".presets button").forEach((boton) => {
     sliderPercentil.value = boton.dataset.percentil;
     valorPercentil.textContent = boton.dataset.percentil;
     marcarPresetActivo();
+    actualizarPista();
   });
 });
 
@@ -66,11 +78,13 @@ selectStat.addEventListener("change", async () => {
   const statInfo = datos[selectStat.value];
   ultimosJugadores = statInfo.jugadores;
   etiquetaActual = { bajo: statInfo.etiqueta_bajo, alto: statInfo.etiqueta_alto };
+  labelActual = statInfo.label;
   corteActual = null;
   resultadoPercentil.textContent = "";
   resultadoUbicar.textContent = "";
   resumenPercentil.textContent = "";
   leyenda.hidden = true;
+  actualizarPista();
   dibujarTarjetas();
 });
 
