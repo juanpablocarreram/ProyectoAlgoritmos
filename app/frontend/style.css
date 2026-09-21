@@ -11,6 +11,9 @@
   --pivote-bg: #fef3c7;
   --puntero-i: #2563eb;
   --puntero-j-bg: #dbeafe;
+  --dentro: #16a34a;
+  --dentro-bg: #dcfce7;
+  --fuera: #9ca3af;
   --sombra: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
   --radio: 14px;
 }
@@ -216,6 +219,45 @@ button:active {
   color: var(--acento-hover);
 }
 
+#resumen-percentil {
+  font-weight: 600;
+  color: var(--dentro);
+  margin-bottom: 0.75rem;
+}
+
+#resumen-percentil:empty {
+  display: none;
+}
+
+.leyenda {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.leyenda-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.leyenda .punto {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.leyenda-item.dentro .punto {
+  background: var(--dentro);
+}
+
+.leyenda-item.fuera .punto {
+  background: var(--fuera);
+}
+
 #tarjetas {
   display: flex;
   flex-wrap: wrap;
@@ -247,6 +289,31 @@ button:active {
 
 .tarjeta.puntero-j {
   background: var(--puntero-j-bg);
+}
+
+.tarjeta.dentro-percentil {
+  border-left: 5px solid var(--dentro);
+  position: relative;
+}
+
+.tarjeta.dentro-percentil::after {
+  content: "✓";
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--dentro);
+  color: #fff;
+  font-size: 0.65rem;
+  line-height: 1.1rem;
+  text-align: center;
+}
+
+.tarjeta.fuera-percentil {
+  border-left: 5px solid var(--fuera);
+  opacity: 0.55;
 }
 
 .controles-animacion {

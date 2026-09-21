@@ -6,10 +6,13 @@ const resultadoPercentil = document.getElementById("resultado-percentil");
 const resultadoUbicar = document.getElementById("resultado-ubicar");
 const tarjetasContenedor = document.getElementById("tarjetas");
 const infoPaso = document.getElementById("info-paso");
+const resumenPercentil = document.getElementById("resumen-percentil");
+const leyenda = document.getElementById("leyenda");
 
 let ultimosJugadores = [];
 let pasosPlanos = [];
 let pasoActual = 0;
+let corteActual = null;
 
 async function cargarStats() {
   const respuesta = await fetch("/api/stats");
@@ -48,6 +51,9 @@ function dibujarPaso() {
     if (indice === paso.j) tarjeta.classList.add("puntero-j");
     if (indice === paso.i) tarjeta.classList.add("puntero-i");
     if (jugador.valor === paso.pivote) tarjeta.classList.add("pivote");
+    if (corteActual !== null) {
+      tarjeta.classList.add(jugador.valor <= corteActual ? "dentro-percentil" : "fuera-percentil");
+    }
     tarjetasContenedor.appendChild(tarjeta);
   });
   infoPaso.textContent = `Ronda ${paso.ronda + 1} — j=${paso.j}, i=${paso.i}, pivote=${paso.pivote}, swap=${paso.swap}`;
@@ -105,6 +111,10 @@ document.getElementById("boton-calcular").addEventListener("click", async () => 
   });
   const datos = await respuesta.json();
   resultadoPercentil.textContent = `Corte: ${datos.valor_corte} (${datos.jugador ?? "sin jugador exacto"})`;
+  corteActual = datos.valor_corte;
+  const dentro = ultimosJugadores.filter((j) => j.valor <= corteActual).length;
+  resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores están dentro del percentil ${cuerpo.percentil} (valor ≤ ${corteActual}).`;
+  leyenda.hidden = false;
   pasosPlanos = aplanarRondas(datos.rondas);
   pasoActual = 0;
   dibujarPaso();
@@ -120,6 +130,10 @@ document.getElementById("boton-ubicar").addEventListener("click", async () => {
   });
   const datos = await respuesta.json();
   resultadoUbicar.textContent = `Quedarías en el percentil ${datos.percentil_estimado} de ${datos.total_jugadores} jugadores.`;
+  corteActual = valor;
+  const dentro = ultimosJugadores.filter((j) => j.valor <= corteActual).length;
+  resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores tienen un valor menor o igual al tuyo (${corteActual}).`;
+  leyenda.hidden = false;
   pasosPlanos = aplanarRondas(datos.rondas);
   pasoActual = 0;
   dibujarPaso();
