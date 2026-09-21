@@ -15,11 +15,15 @@ STATS = {
         "label": "Velocidad de primer saque",
         "unidad": "km/h",
         "columna": "velocidad_kmh",
+        "etiqueta_bajo": "el saque más lento",
+        "etiqueta_alto": "el saque más rápido",
     },
     "edad": {
         "label": "Edad (cumplida en 2025)",
         "unidad": "años",
         "columna": "edad_2025",
+        "etiqueta_bajo": "la edad más baja",
+        "etiqueta_alto": "la edad más alta",
     },
 }
 
@@ -60,6 +64,8 @@ def listar_estadisticas():
         nombre: {
             "label": meta["label"],
             "unidad": meta["unidad"],
+            "etiqueta_bajo": meta["etiqueta_bajo"],
+            "etiqueta_alto": meta["etiqueta_alto"],
             "jugadores": obtener_estadistica(nombre),
             "fuente_datos": fuente,
         }

@@ -10,6 +10,7 @@ const leyenda = document.getElementById("leyenda");
 
 let ultimosJugadores = [];
 let corteActual = null;
+let etiquetaActual = { bajo: "el valor más bajo", alto: "el valor más alto" };
 
 async function cargarStats() {
   const respuesta = await fetch("/api/stats");
@@ -21,7 +22,9 @@ async function cargarStats() {
     opcion.textContent = `${info.label} (${info.unidad})`;
     selectStat.appendChild(opcion);
   }
-  ultimosJugadores = datos[selectStat.value]?.jugadores || [];
+  const statInfo = datos[selectStat.value];
+  ultimosJugadores = statInfo?.jugadores || [];
+  etiquetaActual = { bajo: statInfo?.etiqueta_bajo, alto: statInfo?.etiqueta_alto };
   dibujarTarjetas();
 }
 
@@ -60,7 +63,9 @@ document.querySelectorAll(".presets button").forEach((boton) => {
 selectStat.addEventListener("change", async () => {
   const respuesta = await fetch("/api/stats");
   const datos = await respuesta.json();
-  ultimosJugadores = datos[selectStat.value].jugadores;
+  const statInfo = datos[selectStat.value];
+  ultimosJugadores = statInfo.jugadores;
+  etiquetaActual = { bajo: statInfo.etiqueta_bajo, alto: statInfo.etiqueta_alto };
   corteActual = null;
   resultadoPercentil.textContent = "";
   resultadoUbicar.textContent = "";
@@ -84,7 +89,8 @@ document.getElementById("boton-calcular").addEventListener("click", async () => 
   resultadoPercentil.textContent = `Corte: ${datos.valor_corte} (${datos.jugador ?? "sin jugador exacto"})`;
   corteActual = datos.valor_corte;
   const dentro = ultimosJugadores.filter((j) => j.valor <= corteActual).length;
-  resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores están dentro del percentil ${cuerpo.percentil} (valor ≤ ${corteActual}).`;
+  const restante = 100 - cuerpo.percentil;
+  resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores (${cuerpo.percentil}%) tienen ${etiquetaActual.bajo} — el ${restante}% restante tiene ${etiquetaActual.alto}.`;
   leyenda.hidden = false;
   dibujarTarjetas();
 });
@@ -98,7 +104,8 @@ document.getElementById("boton-ubicar").addEventListener("click", async () => {
     body: JSON.stringify(cuerpo),
   });
   const datos = await respuesta.json();
-  resultadoUbicar.textContent = `Quedarías en el percentil ${datos.percentil_estimado} de ${datos.total_jugadores} jugadores.`;
+  const restante = (100 - datos.percentil_estimado).toFixed(1);
+  resultadoUbicar.textContent = `Estás dentro del ${datos.percentil_estimado}% de jugadores con ${etiquetaActual.bajo} (el ${restante}% restante tiene ${etiquetaActual.alto}).`;
   corteActual = valor;
   const dentro = ultimosJugadores.filter((j) => j.valor <= corteActual).length;
   resumenPercentil.textContent = `${dentro} de ${ultimosJugadores.length} jugadores tienen un valor menor o igual al tuyo (${corteActual}).`;
